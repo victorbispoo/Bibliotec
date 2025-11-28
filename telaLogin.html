@@ -22,24 +22,30 @@
                 <h3>Bem vindo ao Bibliotec, o melhor lugar para fazer sua reserva de livros.</h3>
                 <input type="text" id="username" name="username" placeholder="Username:" required>
                 <input type="password" id="password" name="password" placeholder="Password:" required>
-                <input type="checkbox" name="mostrarSenha" id="btnMostrarSenha"> <label for=""
-                    id="txtMostrarSenha">Mostrar Senha</label>
-                <label for="EsqueciSenha" id="lblEsqueciSenha">Esqueceu sua senha?</label>
-                <button type="EsqueciSenha" id="EsqueciSenha">
-                    <div id="btns">
-                        <button type="submit" id="btnEntrar">Entrar</button>
-                        <button type="submit" id="btnCadastrar">Cadastrar</button>
-                    </div>
-                    <script src="telaLogin.js"></script>
+                <div id="linhaSenha">
+                    <input type="checkbox" name="mostrarSenha" id="btnMostrarSenha"> <label for=""
+                        id="txtMostrarSenha">Mostrar Senha</label>
+                    <label for="EsqueciSenha" id="lblEsqueciSenha">Esqueceu sua senha?</label>
+                    <button type="EsqueciSenha" id="EsqueciSenha">
+                </div>
+                <div id="btns">
+                    <button type="submit" id="btnEntrar">Entrar</button>
+                    <button type="submit" id="btnCadastrar">Cadastrar</button>
+                </div>
+                <script src="telaLogin.js"></script>
             </form>
-        </div>
-    </div>>
-        <div id="redeSocial" style="margin-top:16px; text-align:center;">
-            <p style="font-size:14px; color:#26333D; margin:0 0 8px 0;">Conecte-se conosco:</p>
-            <a href="https://www.facebook.com" target="_blank">Facebook</a> —
-            <a href="https://www.instagram.com" target="_blank">Instagram</a> —
-            <a href="https://twitter.com" target="_blank">X</a>
-        </div>
+            </div>
+            <div id="redesSociais">
+                <p id="redeSocial1">Redes Sociais</p>
+                <a href="https://www.facebook.com" class="redeSocial">Facebook</a>
+                <img src="imgs/ICONS/facebook.png" id="facebook" alt="Facebook">
+                <a href="https://www.instagram.com" class="redeSocial">Instagram</a>
+                <img src="imgs/ICONS/instagram.png" id="instagram" alt="Instagram">
+                <a href="https://www.linkedin.com" class="redeSocial">Linkedin</a>
+                <img src="imgs/ICONS/linkedin.png" id="linkedin" alt="Linkedin">
+            </div>
+        
+    </div>
 </body>
 
 </html>
