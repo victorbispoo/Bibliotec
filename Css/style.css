@@ -92,20 +92,14 @@ h1 {
   background: #1b5c8d;
 }
 
-.botoes-acao {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  margin-top: 12px;
-}
-
 .btn-favoritar {
   background: transparent;
   border: 2px solid var(--cor-primaria);
-  padding: 8px 12px;
-  border-radius: 8px;
-  cursor: pointer;
+  padding: 5px;
+  border-radius: 100px;
   display: flex;
+  border:none;
+  cursor: pointer;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
@@ -114,7 +108,7 @@ h1 {
 }
 
 .btn-favoritar .material-symbols-outlined {
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: var(--cor-primaria);
 }
 
