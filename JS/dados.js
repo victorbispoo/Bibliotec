@@ -4,7 +4,7 @@ const livros = [
   { id: 3, img: "../IMGS/capas/filhasdalua.jpg", nome: "Filhas da Lua" },
   { id: 4, img: "../IMGS/capas/tiparanegocios.jpg", nome: "TI para Negócios" },
   { id: 5, img: "../IMGS/capas/mestresdotempo.jpg", nome: "Mestres do Tempo" },
-  { id: 6, img: "../IMGS/harryordem.jpg", nome: "Harry Potter e as Relíquias da Morte" }
+  { id: 6, img: "../IMGS/diario-banana.jpg", nome: "Diário de um Banana" }
 ];
 
 const categorias = [
