@@ -8,14 +8,7 @@ body {
   background: var(--cor-fundo);
   color: var(--cor-texto);
 }
-h1{
-color: #26333d;
-padding: 10px;
-text-align: center;
-background-color: gray;
-margin-top: 0;
-}
-
 h2 {
+  font-size: 30px;
   padding-left: 2rem;
 }
