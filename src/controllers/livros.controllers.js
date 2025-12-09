@@ -110,28 +110,28 @@ export async function ObterLivros(req, res) {
     }
 };
 
-    export async function AtualizarLivros(req, res) {
-        try {
-            const id = req.params.id;
-            const {
-                titulo,
-                autor,
-                genero,
-                editora,
-                ano_publicacao,
-                isbn,
-                idioma,
-                formato,
-                caminho_capa,
-                sinopse,
-                ativo
-            } = req.body;
+export async function AtualizarLivros(req, res) {
+    try {
+        const id = req.params.id;
+        const {
+            titulo,
+            autor,
+            genero,
+            editora,
+            ano_publicacao,
+            isbn,
+            idioma,
+            formato,
+            caminho_capa,
+            sinopse,
+            ativo
+        } = req.body;
 
-            if (!titulo || !autor || !genero)
-                return res.status(400).json({ erro: "Campos obrigatórios" });
+        if (!titulo || !autor || !genero)
+            return res.status(400).json({ erro: "Campos obrigatórios" });
 
-            await db.execute(
-                `UPDATE livros SET 
+        await db.execute(
+            `UPDATE livros SET 
                 titulo = ?, 
                 autor = ?, 
                 genero = ?, 
@@ -144,42 +144,42 @@ export async function ObterLivros(req, res) {
                 sinopse = ?, 
                 ativo = ?
              WHERE id = ?`,
-                [
-                    titulo,
-                    autor,
-                    genero,
-                    toNull(editora),
-                    toNull(ano_publicacao),
-                    toNull(isbn),
-                    toNull(idioma),
-                    toNull(formato),
-                    toNull(caminho_capa),
-                    toNull(sinopse),
-                    toNull(ativo),
-                    id
-                ]
-            );
+            [
+                titulo,
+                autor,
+                genero,
+                toNull(editora),
+                toNull(ano_publicacao),
+                toNull(isbn),
+                toNull(idioma),
+                toNull(formato),
+                toNull(caminho_capa),
+                toNull(sinopse),
+                toNull(ativo),
+                id
+            ]
+        );
 
-            res.json({ mensagem: "Livro atualizado com sucesso!" });
-        } catch (err) {
-            res.status(500).json({ erro: err.message });
-        }
-    };
+        res.json({ mensagem: "Livro atualizado com sucesso!" });
+    } catch (err) {
+        res.status(500).json({ erro: err.message });
+    }
+};
 
 
-    export async function DeletarLivros(req, res) {
-        try {
-            await db.execute("DELETE FROM livros WHERE id = ?", [req.params.id]);
-            res.json({ mensagem: "Livro deletado com sucesso!" });
-        } catch (err) {
-            res.status(500).json({ erro: err.message });
-        }
-    };
+export async function DeletarLivros(req, res) {
+    try {
+        await db.execute("DELETE FROM livros WHERE id = ?", [req.params.id]);
+        res.json({ mensagem: "Livro deletado com sucesso!" });
+    } catch (err) {
+        res.status(500).json({ erro: err.message });
+    }
+};
 
-    export async function ListarAvaliacoesDeLivros(req, res) {
-        try {
-            const livroId = req.params.id;
-            const sql = `
+export async function ListarAvaliacoesDeLivros(req, res) {
+    try {
+        const livroId = req.params.id;
+        const sql = `
       SELECT 
         l.id AS id_livro,
         l.titulo,
@@ -192,10 +192,10 @@ export async function ObterLivros(req, res) {
 
     `;
 
-            const [rows] = await db.query(sql, [livroId]);
-            res.status(200).json(rows);
-        } catch (error) {
-            console.error("Erro ao listar avaliações do livro:", error);
-            res.status(500).json({ message: "Erro ao buscar avaliações do livro" });
-        }
+        const [rows] = await db.query(sql, [livroId]);
+        res.status(200).json(rows);
+    } catch (error) {
+        console.error("Erro ao listar avaliações do livro:", error);
+        res.status(500).json({ message: "Erro ao buscar avaliações do livro" });
     }
+};
