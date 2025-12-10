@@ -1,5 +1,5 @@
 const API_URL = "http://localhost:3000";
-const id_usuario = 4; 
+const id_usuario = 5; 
 
 async function carregarReservas() {
   const statusGrid = document.getElementById("booksStatusGrid");
@@ -25,19 +25,19 @@ async function carregarFavoritos() {
   const grid = document.getElementById("booksGrid");
   grid.innerHTML = "";
 
-  const resp = await fetch(`${API_URL}/favoritos`);
-  const dados = await resp.json();
+  const resp = await fetch(`${API_URL}/favoritos/${id_usuario}`);
+  const lista = await resp.json();
 
-  dados.forEach(livro => {
+  lista.forEach(item => {
     const card = document.createElement("div");
     card.classList.add("book-card");
 
     card.innerHTML = `
-      <img src="${livro.img}" alt="${livro.titulo}">
-      <h3>${livro.titulo}</h3>
-      <p>${livro.autor}</p>
+      <img src="${item.caminho_capa}" alt="${item.titulo_livro}">
+    <h3>${item.titulo_livro}</h3>
+    <p class="tag">Autor: ${item.autor}</p>
 
-      <button class="favorite-btn">
+      <button class="favorite-btn" id="FavoriteBTN">
         <span class="material-symbols-outlined">favorite</span>
       </button>
     `;
@@ -60,4 +60,34 @@ document.addEventListener("click", (e) => {
     icon.textContent =
       icon.textContent === "favorite" ? "favorite_border" : "favorite";
   }
-}); 
+});
+
+function adicionarEventos() {
+    const btnVoltar = document.getElementById("voltar_inicio");
+
+    if (btnVoltar) {
+        btnVoltar.addEventListener("click", () => {
+            window.history.back();
+        });
+    }
+}
+
+
+document.addEventListener("click", async (e) => {
+    if (e.target.classList.contains("FavoriteBTN")) {
+
+        const idFavorito = e.target.getAttribute("FavoriteBTN");
+
+        const resposta = await fetch(`${API_URL}/favoritos/${idFavorito}`, {
+            method: "DELETE"
+        });
+
+        if (resposta.status === 204) {
+            const card = e.target.closest(".card-livro");
+            if (card) card.remove();
+        }
+    }
+});
+
+
+adicionarEventos();
