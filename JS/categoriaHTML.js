@@ -2,7 +2,7 @@ const API_URL = "http://localhost:3000";
 const id_usuario = 4; 
 
 async function carregarReservas() {
-  const statusGrid = document.getElementById("booksStatusGrid");
+  const statusGrid = document.getElementById("livrosPorCategoria");
   statusGrid.innerHTML = "";
 
 const resp = await fetch(`${API_URL}/livros`);
@@ -15,8 +15,20 @@ lista.forEach(item => {
   card.innerHTML = `
     <img src="${item.caminho_capa}" alt="${item.titulo_livro}">
     <h3>${item.titulo_livro}</h3>
-    <p class="tag">Devolução: ${item.data_devolucao}</p>
   `;
 
   statusGrid.appendChild(card);
 })};
+
+carregarReservas();
+
+async function carregarTituloCategoria() {
+    const titulo = document.getElementById("tituloCategoria");
+
+    const resp = await fetch(`http://localhost:3000/categorias/${idCategoria}`);
+    const dados = await resp.json();
+
+    titulo.textContent = `Categoria: ${dados.nome}`;
+}
+
+carregarTituloCategoria();
