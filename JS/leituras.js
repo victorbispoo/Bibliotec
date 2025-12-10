@@ -60,4 +60,4 @@ document.addEventListener("click", (e) => {
     icon.textContent =
       icon.textContent === "favorite" ? "favorite_border" : "favorite";
   }
-});
+}); 
