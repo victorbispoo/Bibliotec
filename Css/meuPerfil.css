@@ -1,11 +1,41 @@
 .perfil-icone {
  font-size: 120px;
- color: #26333d;
+ color: #ffffff;
 user-select: none;
+display: flex;
+align-items: center;
+justify-content: center;
 }
-
 .perfil-container {
  display: flex;
  flex-direction: column;
  align-items: center;
+}
+.background-perfil {
+ background-color: #26333d;
+ padding: 20px;
+ border-radius: 10px;
+ width: 50%;
+}
+
+h3{
+ color: #fff;
+}
+h2{
+color: #fff;
+display: flex;
+justify-content: center;
+}
+#editarPerfilBtn {
+  background: #fff;
+  color:#26333d;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+#editarPerfilBtn:hover {
+  background: #1b5c8d;
+  color: #fff;
 }
