@@ -1,22 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../IMGS/Group.svg" type="image/x-icon">
     <link rel="stylesheet" href="../Css/header.css">
     <link rel="stylesheet" href="../Css/detalhes.css">
+    <link rel="stylesheet" href="../Css/categoria.css">
+    <link rel="stylesheet" href="../Css/footer.css">
     <title>BIBLIO TEC</title>
 </head>
 
 
 <body>
     <div id="header-placeholder"></div>
-    <main id="conteudoCategoria">
-        
-    </main>
+    <div class="detalhes_head">
+        <h1 id="tituloCategoria">Livros de Categoria</h1>
+        <button class="btn" id="voltar_inicio">Voltar</button>
+    </div>
+    <div class="books-section">
+        <div class="books-grid" id="livrosPorCategoria"></div>
+
+    </div>
+
     <div id="footer-placeholder"></div>
 
+    <script type="module" src="../JS/categoriaHTML.js"></script>
     <script type="module" src="../JS/header.js"></script>
     <script type="module" src="../JS/footer.js"></script>
 </body>
