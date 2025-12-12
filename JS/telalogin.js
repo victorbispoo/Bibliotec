@@ -30,6 +30,10 @@ async function extrairListaUsuarios() {
     );
     if (usuarioEncontrado) {
         console.log('Usuário encontrado:', usuarioEncontrado);
+        if(usuarioEncontrado.cargo === 'admin'){
+            localStorage.setItem('isAdmin', true);
+        }
+        else localStorage.setItem('isAdmin', false);
         id = usuarioEncontrado.id;
         localStorage.setItem('userId', id);
         console.log('ID salvo no localStorage:', id);

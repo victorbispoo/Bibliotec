@@ -1,40 +1,51 @@
 const id = localStorage.getItem("userId");
 let editando = false;
- const btnEditar = document.getElementById("editarPerfilBtn");
-   const spanNome = document.getElementById("nomeUsuario")
-  const spanEmail = document.getElementById("emailUsuario")
-  const spanSenha = document.getElementById("senhaUsuario")
-  const spanTelefone = document.getElementById("telefoneUsuario")
+const btnEditar = document.getElementById("editarPerfilBtn");
+const btnSair = document.getElementById("sairPerfilBtn");
+const spanNome = document.getElementById("nomeUsuario")
+const spanEmail = document.getElementById("emailUsuario")
+const spanSenha = document.getElementById("senhaUsuario")
+const spanTelefone = document.getElementById("telefoneUsuario")
 
 async function carregarPerfil() {
-  try{
-  const resposta = await fetch(`http://localhost:3000/usuarios/${id}`);
-  const dados = await resposta.json();
-    console.log("Carregando perfil do usuário com ID: " + id);
-    spanNome.textContent = dados.nome;
-    spanEmail.textContent = dados.email;
-    spanSenha.textContent = dados.senha;
-    spanTelefone.textContent = dados.telefone;
-  } catch (erro) {
-    console.error("Erro ao carregar perfil:", erro);
-      console.log("Carregando perfil do usuário com ID: " + id);
+    try {
+        const resposta = await fetch(`http://localhost:3000/usuarios/${id}`);
+        const dados = await resposta.json();
+        console.log("Carregando perfil do usuário com ID: " + id);
+        console.log("Dados do usuário:", dados);
+        if (localStorage.getItem('isAdmin') === 'true') {
+            spanNome.textContent = dados.nome + " (Admin)";
+        }
+        else spanNome.textContent = dados.nome;
+        spanEmail.textContent = dados.email;
+        spanSenha.textContent = dados.senha;
+        spanTelefone.textContent = dados.telefone;
+    } catch (erro) {
+        console.error("Erro ao carregar perfil:", erro);
+        console.log("Carregando perfil do usuário com ID: " + id);
 
-  }
+    }
 }
 
 btnEditar.addEventListener("click", async () => {
     if (editando) {
         console.log("Entrou no modo Salvar.");
-        await salvarPerfil(); 
+        await salvarPerfil();
     } else {
         console.log("Entrou no modo Editar.");
         entrarModoEdicao();
     }
 });
+
+btnSair.addEventListener("click", async () => {
+    localStorage.removeItem("userId");
+    window.location.href = '/FrontEnd/telaLogin.html';
+});
+
 function entrarModoEdicao() {
     editando = true;
     btnEditar.textContent = "Salvar Alterações";
-    btnEditar.style.backgroundColor = "#28a745"; 
+    btnEditar.style.backgroundColor = "#28a745";
     btnEditar.style.color = "#fff";
     spanNome.innerHTML = `<input type="text" id="inputNome" value="${spanNome.textContent}">`;
     spanEmail.innerHTML = `<input type="email" id="inputEmail" value="${spanEmail.textContent}">`;
@@ -65,9 +76,9 @@ async function salvarPerfil() {
             editando = false;
             btnEditar.textContent = "Editar Perfil";
             btnEditar.style.backgroundColor = "";
-            btnEditar.style.color = ""; 
+            btnEditar.style.color = "";
 
-            carregarPerfil(); 
+            carregarPerfil();
         } else {
             alert("Erro ao atualizar.");
         }

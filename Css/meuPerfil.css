@@ -34,6 +34,7 @@ display: flex;
 justify-content: center;
 }
 #editarPerfilBtn {
+  font-family: 'Montserrat', sans-serif;
   background: #fff;
   color:#26333d;
   padding: 10px 14px;
@@ -48,6 +49,7 @@ justify-content: center;
 }
 
 #sairPerfilBtn {
+  font-family: 'Montserrat', sans-serif;
   background: #fff;
   color:#26333d;
   padding: 10px 14px;
@@ -57,6 +59,6 @@ justify-content: center;
   transition: all 0.3s ease;
 }
 #sairPerfilBtn:hover {
-  background: #1b5c8d;
+  background: #880606;
   color: #fff;
 }
