@@ -20,6 +20,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: auto;
+  padding-top: 20px;
 }
 
 h1 {
@@ -141,6 +142,9 @@ h1 {
   .detalhes_Cobrir .book-cover-img {
     width: 100%;
     height: auto;
+  }
+  body{
+    padding-top: 0px;
   }
 }
 
