@@ -1,5 +1,4 @@
 const API_URL = "http://localhost:3000";
-var formLogin = document.getElementById('formLogin');
 var chk = document.getElementById('btnMostrarSenha');
 var senha = document.getElementById('password');
 var username = document.getElementById('username');
@@ -17,33 +16,30 @@ async function extrairListaUsuarios() {
         return [];
     }
 }
-
-document.addEventListener('DOMContentLoaded', function () {
     chk.addEventListener('change', function () {
         if (senha) senha.type = chk.checked ? 'text' : 'password';
     });
-
-    formLogin.addEventListener('submit', async function (e) {
-        e.preventDefault();
-        const listaUsuarios = await extrairListaUsuarios();
-        if (username && senha && listaUsuarios.length > 0) {
-            const usuarioEncontrado = listaUsuarios.some(perfil =>
-                perfil.nome === username.value || perfil.email === username.value
-            );
-            const senhaCorreta = listaUsuarios.some(perfil =>
-                perfil.senha === senha.value
-            );
-            if (usuarioEncontrado && senhaCorreta) {
-                const id = listaUsuarios.find(perfil =>
-                    (perfil.nome === username.value || perfil.email === username.value) && perfil.senha === senha.value
-                ).id;
-                window.location.href = '/FrontEnd/telaInicial.html';
-                alert('ID do usuário:', id);
-            } else {
-                alert('Usuário ou senha inválidos!');
-            }
-        } else {
-            alert('Por favor, preencha os campos obrigatórios.');
+    btnEntrar.addEventListener('click', async function (e) {
+    e.preventDefault();
+    const listaUsuarios = await extrairListaUsuarios();
+    if (!username || !senha) return;
+    const usernameValue = username.value;
+    const senhaValue = senha.value;
+    const usuarioEncontrado = listaUsuarios.find(perfil =>
+        (perfil.nome === usernameValue || perfil.email === usernameValue) && perfil.senha === senhaValue
+    );
+    if (usuarioEncontrado) {
+        console.log('Usuário encontrado:', usuarioEncontrado);
+        if(usuarioEncontrado.cargo === 'admin'){
+            localStorage.setItem('isAdmin', true);
         }
-    });
+        else localStorage.setItem('isAdmin', false);
+        id = usuarioEncontrado.id;
+        localStorage.setItem('userId', id);
+        console.log('ID salvo no localStorage:', id);
+        window.location.href = '/FrontEnd/telaInicial.html';
+    }
+    else{
+        alert('Usuário ou senha incorretos. Tente novamente.');
+    }
 });
