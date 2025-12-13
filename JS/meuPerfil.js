@@ -1,6 +1,6 @@
-const id = localStorage.getItem("userId");
+const id = 4;
 let editando = false;
-<<<<<<< HEAD
+
  const fotodePerfil = document.getElementById("fotoPerfil");
  const btnEditar = document.getElementById("editarPerfilBtn");
   const spanNome = document.getElementById("nomeUsuario")
@@ -20,33 +20,6 @@ async function carregarPerfil() {
   } catch (erro) {
     console.error("Erro ao carregar perfil:", erro);
   }
-=======
-const btnEditar = document.getElementById("editarPerfilBtn");
-const btnSair = document.getElementById("sairPerfilBtn");
-const spanNome = document.getElementById("nomeUsuario")
-const spanEmail = document.getElementById("emailUsuario")
-const spanSenha = document.getElementById("senhaUsuario")
-const spanTelefone = document.getElementById("telefoneUsuario")
-
-async function carregarPerfil() {
-    try {
-        const resposta = await fetch(`http://localhost:3000/usuarios/${id}`);
-        const dados = await resposta.json();
-        console.log("Carregando perfil do usuário com ID: " + id);
-        console.log("Dados do usuário:", dados);
-        if (localStorage.getItem('isAdmin') === 'true') {
-            spanNome.textContent = dados.nome + " (Admin)";
-        }
-        else spanNome.textContent = dados.nome;
-        spanEmail.textContent = dados.email;
-        spanSenha.textContent = dados.senha;
-        spanTelefone.textContent = dados.telefone;
-    } catch (erro) {
-        console.error("Erro ao carregar perfil:", erro);
-        console.log("Carregando perfil do usuário com ID: " + id);
-
-    }
->>>>>>> f02268195b9fc295d0662eb1e19edb15fc23838b
 }
 
 btnEditar.addEventListener("click", async () => {
