@@ -3,9 +3,10 @@ function adicionarEventos() {
   const ListarLivros = document.getElementById("listar_livro")
   const AddLivro = document.getElementById("add_livro");
   const EditLivro = document.getElementById("editar_livro")
-  const AddUsers = document.getElementById("cadastro")
+  const ListarUsers = document.getElementById("listarUsers")
+  const AddUsers = document.getElementById("Cadastrar")
   const EditUsers = document.getElementById("editar_users");
-  const RemoveUsers = document.getElementById("remover_user")
+
 
 
   if (btnVoltar) {
@@ -15,17 +16,32 @@ function adicionarEventos() {
   }
   if (ListarLivros) {
     ListarLivros.addEventListener("click", () => {
-      window.location.href = "listar.html";
+      window.location.href = "../FrontEnd/listarLivros.html";
     })
   }
   if (AddLivro) {
     AddLivro.addEventListener("click", () => {
-      window.location.href = "AddLivro.html";
+      window.location.href = "../FrontDoADM/AddLivros.html";
     })
   }
   if (EditLivro) {
     EditLivro.addEventListener("click", () => {
       window.location.href = "EditarLivros.html";
+    })
+  }
+  if (ListarUsers) {
+    ListarUsers.addEventListener("click", () => {
+      window.location.href = "../FrontDoADM/listarUsers.html";
+    })
+  }
+  if (AddUsers) {
+    AddUsers.addEventListener("click", () => {
+      window.location.href = "../FrontEnd/Cadastro.html";
+    })
+  }
+  if (EditUsers) {
+    ListarUsers.addEventListener("click", () => {
+      window.location.href = "EditUsers.html";
     })
   }
 }
