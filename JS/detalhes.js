@@ -21,8 +21,9 @@ async function carregarDetalhesLivro(livroId) {
             throw new Error("Livro não encontrado na resposta da API.");
         }
 
-        // renderiza
-        renderizarDetalhesLivro(livro);
+        const media = await carregarMediaAvaliacoes(livroId);
+        renderizarDetalhesLivro(livro, media);
+
 
     } catch (error) {
         console.error("Erro ao carregar livro:", error);
@@ -34,7 +35,25 @@ async function carregarDetalhesLivro(livroId) {
     }
 }
 
-function renderizarDetalhesLivro(livro) {
+async function carregarMediaAvaliacoes(livroId) {
+    try {
+        const response = await fetch(`${API_URL}/avaliacao/medias/${livroId}`);
+        if (!response.ok) throw new Error("Erro ao buscar média");
+
+        const data = await response.json();
+
+        if (data.media == null) return null;
+
+        const media = Number(data.media);
+        return Number.isFinite(media) ? media : null;
+
+    } catch (err) {
+        console.error("Erro média avaliações:", err);
+        return null;
+    }
+}
+
+function renderizarDetalhesLivro(livro, media) {
     // pega container já existente (sua section id="detalhes") ou fallback
     const container = document.getElementById("detalhes") || document.getElementById("conteudoLivro");
     if (!container) {
@@ -60,6 +79,14 @@ function renderizarDetalhesLivro(livro) {
                 <p class="autor" id="detalhes_Autor">Autor: ${livro.autor || 'Desconhecido'}</p>
                 <p class="publicacao">Publicação: ${livro.ano_publicacao || 'N/A'}</p>
                 <p class="detalhes_sinopse">Sinopse: ${livro.sinopse || 'Sem sinopse disponível'}</p>
+                <p class="detalhes_media">
+                Avaliação média:
+                <strong>
+                    ${media && media > 0 
+                        ? `⭐ ${media.toFixed(1)} / 5`
+                        : 'Sem avaliações'}
+                </strong>
+                </p>
                 <p class="ativo">Disponibilidade: ${livro.ativo === 1 || livro.ativo === true ? '✅ Disponível' : '❌ Indisponível'}</p>
                 
                 <div class="botoes-acao">
@@ -110,19 +137,19 @@ function adicionarEventos() {
     const btnVoltar = document.getElementById("voltar_inicio");
     const btnFavoritar = document.getElementById("favoritarBTN");
     const btnReservar = document.getElementById("reservarBTN");
-    
+
     if (btnVoltar) {
         btnVoltar.addEventListener("click", () => {
             window.history.back();
         });
     }
-    
+
     if (btnFavoritar) {
-        btnFavoritar.addEventListener("click", function() {
+        btnFavoritar.addEventListener("click", function () {
             this.classList.toggle("active");
         });
     }
-    
+
     if (btnReservar) {
         btnReservar.addEventListener("click", () => {
             alert("Livro reservado com sucesso! ✅");
@@ -138,7 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
     carregarDetalhesLivro(livroId);
 });
 
-window.irParaDetalhes = function(id) {
-  if (!id) return console.warn("irParaDetalhes: id vazio");
-  window.location.href = `detalhes.html?id=${id}`;
+window.irParaDetalhes = function (id) {
+    if (!id) return console.warn("irParaDetalhes: id vazio");
+    window.location.href = `detalhes.html?id=${id}`;
 };

@@ -7,7 +7,7 @@ if (typeof window.irParaDetalhes !== "function") {
 }
 
 const API_URL = "http://localhost:3000";
-const id_usuario = 4;
+const id_usuario = localStorage.getItem("userId");
 
 
 async function carregarReservas() {

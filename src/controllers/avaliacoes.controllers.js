@@ -3,7 +3,7 @@ import { db } from "../config/db.js";
 // ============================
 // LISTAR AVALIAÇÕES
 // ============================
-export const listarAvaliacoes = async (req, res) => {
+export async function listarAvaliacoes(req, res){
   try {
     const sql = `
       SELECT 
@@ -28,11 +28,10 @@ export const listarAvaliacoes = async (req, res) => {
 // ============================
 // CRIAR AVALIAÇÃO
 // ============================
-export const criarAvaliacao = async (req, res) => {
+export async function criarAvaliacao(req, res){
   try {
     const { usuario_id, livro_id, comentario, nota } = req.body;
 
-    // validação simples
     if (!usuario_id || !livro_id || !comentario || !nota) {
       return res
         .status(400)
@@ -53,9 +52,9 @@ export const criarAvaliacao = async (req, res) => {
 };
 
 export async function ListarAvaliacoesDeLivros(req, res) {
-    try {
-        const livroId = req.params.id;
-        const sql = `
+  try {
+    const livroId = req.params.id;
+    const sql = `
         SELECT
         l.id AS id_livro,
         l.titulo,
@@ -66,10 +65,40 @@ export async function ListarAvaliacoesDeLivros(req, res) {
         GROUP BY l.id, l.titulo
         ORDER BY l.titulo;
         `;
-        const [rows] = await db.query(sql, [livroId]);
-        res.status(200).json(rows);
-    } catch (error) {
-        console.error("Erro ao listar avaliações do livro:", error);
-        res.status(500).json({ message: "Erro ao buscar avaliações do livro" });
+    const [rows] = await db.query(sql, [livroId]);
+    res.status(200).json(rows);
+  } catch (error) {
+    console.error("Erro ao listar avaliações do livro:", error);
+    res.status(500).json({ message: "Erro ao buscar avaliações do livro" });
+  }
+}
+
+export async function MediaAvaliacoesPorLivro(req, res) {
+  try {
+    const livroId = req.params.id;
+
+    const sql = `
+            SELECT
+            l.id AS id_livro,
+            COUNT(a.id) AS total_avaliacoes,
+            COALESCE(ROUND(AVG(a.nota), 2), 0) AS media
+            FROM livros l
+            LEFT JOIN avaliacoes a ON l.id = a.livro_id
+            WHERE l.id = ?
+            GROUP BY l.id;
+        `;
+
+    const [rows] = await db.query(sql, [livroId]);
+
+    if (rows.length === 0) {
+      return res.status(404).json({ message: "Livro não encontrado" });
     }
+
+    res.status(200).json(rows[0]);
+    // { id_livro, total_avaliacoes, media }
+
+  } catch (error) {
+    console.error("Erro ao buscar média:", error);
+    res.status(500).json({ message: "Erro ao buscar média do livro" });
+  }
 }
