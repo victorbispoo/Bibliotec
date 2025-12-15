@@ -75,7 +75,10 @@ function renderizarComentarios(comentarios) {
                 <div class="avatar">
                     <span class="material-symbols-outlined">person</span>
                 </div>
-                <div class="comentario-nota">⭐ ${Number(c.nota).toFixed(1)}</div>
+                <div class="nome-nota">
+                    <div class="comentario-nota">⭐ ${Number(c.nota).toFixed(1)}</div>
+                    <span class="usuario-nome">${c.nome_usuario || 'Usuário'}</span>
+                </div>
                 <p class="comentario-texto">${c.comentario}</p>
                 <span class="comentario-data">${c.data_avaliacao}</span>
             </div>`;
@@ -94,7 +97,7 @@ async function renderizarDetalhesLivro(livro, media) {
     if (!container) return;
 
     container.innerHTML = `
-    <div class="detalhes_head">
+     <div class="detalhes_head">
         <h1>Detalhes do Livro</h1>
         <button class="btn" id="voltar_inicio">Voltar</button>
     </div>
@@ -102,21 +105,29 @@ async function renderizarDetalhesLivro(livro, media) {
     <div class="detalhes_conteudo">
         <div class="detalhes_Cobrir">
             <img src="${livro.caminho_capa || '../IMGS/trabalho em andamento.jpg'}" 
-                 alt="Capa: ${livro.titulo}" 
+                 alt="Capa: ${livro.titulo || 'Sem título'}" 
                  class="book-cover-img">
         </div>
 
         <div class="meta">
-            <h2>${livro.titulo}</h2>
+            <h2>${livro.titulo || 'Título indisponível'}</h2>
             <p>Autor: ${livro.autor || 'Desconhecido'}</p>
             <p>Publicação: ${livro.ano_publicacao || 'N/A'}</p>
             <p>Sinopse: ${livro.sinopse || 'Sem sinopse disponível'}</p>
 
             <div class="detalhes_media">
-                Avaliação média: ${media > 0 ? media.toFixed(1) : 'Sem avaliações'}
+                Avaliação média:
+                ${media && media > 0 ? `
+                    <div class="estrelas-wrapper">
+                        <div class="estrelas">
+                            <div class="estrelas-back">★★★★★</div>
+                            <div class="estrelas-front" style="width: ${(media/5)*100}%">★★★★★</div>
+                        </div>
+                        <span class="nota">(${media.toFixed(1)})</span>
+                    </div>` : `<span class="sem-avaliacao">Sem avaliações</span>`}
             </div>
 
-            <p class="ativo">Disponibilidade: ${livro.ativo === 1 ? '✅ Disponível' : '❌ Indisponível'}</p>
+            <p class="ativo">Disponibilidade: ${livro.ativo === 1 || livro.ativo === true ? 'Disponível <span class="material-symbols-outlined" id="disponibilidade">check_small</span>' : 'Indisponível<span class="material-symbols-outlined" id="disponibilidade">close_small</span>'}</p>
 
             <div class="botoes-acao">
                 <button class="btn-favoritar" id="favoritarBTN">
@@ -124,6 +135,31 @@ async function renderizarDetalhesLivro(livro, media) {
                 </button>
                 <button class="btn-reserva" id="reservarBTN">Reservar Livro</button>
             </div>
+        </div>
+    </div>
+
+    <div class="info-tecnica">
+        <h3>Informações Técnicas</h3>
+        <hr class="linha">
+        <div class="info-item">
+            <span class="info-titulo">Categorias:</span>
+            <span class="tag">${livro.categoria || 'N/A'}</span>
+        </div>
+        <div class="info-item">
+            <span class="info-titulo">Idioma:</span>
+            <span class="tag">${livro.idioma || 'N/A'}</span>
+        </div>
+        <div class="info-item">
+            <span class="info-titulo">Formato:</span>
+            <span class="tag">${livro.formato || 'N/A'}</span>
+        </div>
+        <div class="info-item">
+            <span class="info-titulo">Editora:</span>
+            <span class="tag">${livro.editora || 'N/A'}</span>
+        </div>
+        <div class="info-item">
+            <span class="info-titulo">ISBN:</span>
+            <span class="tag">${livro.isbn || 'N/A'}</span>
         </div>
     </div>
 
@@ -191,12 +227,12 @@ async function configurarReserva(livroId) {
 
         if (reservaLivro) {
             if (Number(reservaLivro.id_usuario) === usuarioId) {
-                novoBtn.textContent = "Reservado ✅";
+                novoBtn.textContent = "Reservado";
             } else {
-                novoBtn.textContent = "Indisponível ❌";
+                novoBtn.textContent = "Indisponível";
             }
             novoBtn.disabled = true;
-            novoBtn.style.backgroundColor = "#ccc";  // cinza
+            novoBtn.style.backgroundColor = "#ccc";
             novoBtn.style.cursor = "not-allowed";
             return;
         }

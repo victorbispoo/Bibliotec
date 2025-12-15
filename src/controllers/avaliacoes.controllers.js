@@ -9,12 +9,15 @@ export async function listarAvaliacoes(req, res){
 
     const sql = `
 SELECT
+	  u.id,
+	  u.nome AS nome_usuario,
     a.nota,
     a.comentario,
     DATE_FORMAT(a.data_avaliacao, '%Y-%m-%d') AS data_avaliacao
-FROM avaliacoes a
-WHERE a.livro_id = ?
-ORDER BY data_avaliacao desc
+    FROM avaliacoes a
+    JOIN usuarios u ON a.usuario_id = u.id
+    WHERE a.livro_id = ?
+    order BY a.data_avaliacao DESC
     `;
 
     const [rows] = await db.query(sql , [id_livro]);
