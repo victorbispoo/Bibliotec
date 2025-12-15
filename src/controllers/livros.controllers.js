@@ -22,10 +22,11 @@ export async function PostarLivros(req, res) {
       isbn,
       idioma,
       formato,
-      sinopse
+      sinopse,
+      ativo
     } = req.body;
 
-    const ativo = 1;
+
 
     const anoPublicacaoFinal =
       ano_publicacao === "" ? null : ano_publicacao;

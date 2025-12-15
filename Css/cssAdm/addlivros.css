@@ -20,17 +20,45 @@ input,select {
     border-radius: 20px;
     font-size: 16px;
 }
+button#btnCadastrar {
+    padding: 10px 20px;
+    background-color: #26333d;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+button#btnCadastrar:hover {
+    background-color: #3a4a54;
+    transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+}
 
 #btns {
     grid-column: span 3;
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    padding-bottom: 20px;
 }
 h3 {
     display: flex;
     justify-content: center;
-    padding-bottom: 70px;
+    padding-top: 10px;
+    padding-bottom: 20px;
     font-size: 25px;
     color: #26333d;
+}
+#previewContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+}
+img#previewCapa {
+    max-width: 150px;
+    max-height: 200px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
