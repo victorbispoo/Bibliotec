@@ -28,7 +28,11 @@ h2 {
 #voltar_inicio:hover {
     background-color: #1c252c;
 }
-
+footer{
+    position: fixed;
+    bottom: 0;
+    
+}
 
 /* =========================
    TABELA (CANTO A CANTO)
