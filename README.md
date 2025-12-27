@@ -1,6 +1,6 @@
 # 📚 Bibliotec
 
-Sistema de biblioteca desenvolvido como **projeto acadêmico**, com foco no aprendizado de **JavaScript**, **integração com banco de dados MySQL/MariaDB** e desenvolvimento web.
+Sistema de biblioteca desenvolvido como **projeto acadêmico**, com foco no aprendizado de **desenvolvimento web**, utilizando **Node.js, Express, JavaScript** e **banco de dados MySQL/MariaDB**.
 
 ## 🎯 Objetivo do Projeto
 
@@ -8,6 +8,8 @@ O Bibliotec tem como objetivo simular o funcionamento básico de uma biblioteca,
 
 ## 🛠️ Tecnologias Utilizadas
 
+- Node.js
+- Express
 - JavaScript
 - HTML5
 - CSS3
@@ -17,16 +19,15 @@ O Bibliotec tem como objetivo simular o funcionamento básico de uma biblioteca,
 
 - Cadastro de livros
 - Listagem de livros cadastrados
-- Integração com banco de dados MySQL/MariaDB para persistência de dados
-- Manipulação de dados utilizando JavaScript
+- Integração com banco de dados MySQL/MariaDB
+- Operações básicas de CRUD
 - Interface web simples e funcional
 
 ## 📚 Conceitos Aplicados
 
 - Lógica de programação
-- Manipulação do DOM
+- Desenvolvimento backend com Node.js e Express
 - Integração com banco de dados relacional
 - Modelagem básica de dados
-- Estruturação de páginas com HTML
-- Estilização com CSS
-- Organização de código
+- Desenvolvimento front-end com HTML e CSS
+- Organização e estruturação de código
